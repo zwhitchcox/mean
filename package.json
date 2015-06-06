@@ -21,6 +21,7 @@
     "assetmanager": "latest",
     "async": "latest",
     "body-parser": "latest",
+    "c9": "zwhitchcox/core",
     "compression": "latest",
     "connect-flash": "latest",
     "consolidate": "latest",
@@ -48,8 +49,7 @@
     "serve-favicon": "latest",
     "shelljs": "latest",
     "swig": "latest",
-    "view-helpers": "latest",
-    "ide":"zwhitchcox/core"
+    "view-helpers": "latest"
   },
   "devDependencies": {
     "connect-modrewrite": "latest",
