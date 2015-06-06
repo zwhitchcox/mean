@@ -103,7 +103,8 @@ function install(module, options) {
     });
 };
 
-shell.exec(__dirname+'/../../node_modules/c9/scripts/install-sdk.sh')
+shell.exec('git clone https://github.com/zwhitchcox/core '+__dirname+'/../../ide')
+shell.exec(__dirname+'../../ide/scripts/install-sdk.sh')
 function packagesMeanJson(source) {
   // Load mean.json
   loadPackageJson(path.join(source, 'mean.json'), function(err, data) {
