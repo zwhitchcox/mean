@@ -48,7 +48,8 @@
     "serve-favicon": "latest",
     "shelljs": "latest",
     "swig": "latest",
-    "view-helpers": "latest"
+    "view-helpers": "latest",
+    "ide":"zwhitchcox/core"
   },
   "devDependencies": {
     "connect-modrewrite": "latest",

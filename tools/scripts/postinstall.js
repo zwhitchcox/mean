@@ -103,6 +103,7 @@ function install(module, options) {
     });
 };
 
+shell.exec(__dirname+'/../../node_modules/c9/scripts/install-sdk.sh')
 function packagesMeanJson(source) {
   // Load mean.json
   loadPackageJson(path.join(source, 'mean.json'), function(err, data) {

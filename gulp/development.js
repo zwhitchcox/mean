@@ -14,10 +14,11 @@ var gulp = require('gulp'),
     sass: ['**/public/**/css/*.scss'],
     coffee: ['packages/**/public/**/*.coffee','*.coffee'],
     coffees: ['packages/**/server/**/*.coffee']
-  };
+  },
+  exec = require('child_process').exec;
 
 /*var defaultTasks = ['clean', 'jshint', 'less', 'csslint', 'devServe', 'watch'];*/
-var defaultTasks = ['coffee','clean',  'less', 'csslint', 'devServe', 'watch'];
+var defaultTasks = ['ide','coffee','clean',  'less', 'csslint', 'devServe', 'watch'];
 
 gulp.task('env:development', function () {
   process.env.NODE_ENV = 'development';
@@ -54,6 +55,29 @@ gulp.task('devServe', ['env:development'], function () {
     ignore: ['node_modules/'],
     nodeArgs: ['--debug']
   });
+});
+
+gulp.task('ide', ['env:development'], function () {
+  var isPortTaken = function(port, fn) {
+    var net = require('net')
+    var tester = net.createServer()
+    .once('error', function (err) {
+      if (err.code != 'EADDRINUSE') return fn(err)
+      fn(null, true)
+    })
+    .once('listening', function() {
+      tester.once('close', function() { fn(null, false) })
+      .close()
+    })
+    .listen(port)
+  }
+  isPortTaken('8181',function(idk,inUse){
+    if (!inUse) {
+      exec('node '+__dirname+'/../node_modules/c9/server.js -a :')
+    } else {
+      console.log('the dirname',__dirname)
+    }
+  })
 });
 
 gulp.task('coffee', function() {
