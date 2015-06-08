@@ -58,32 +58,14 @@ gulp.task('devServe', ['env:development'], function () {
 });
 
 gulp.task('ide', ['env:development'], function () {
-  var isPortTaken = function(port, fn) {
-    var net = require('net')
-    var tester = net.createServer()
-    .once('error', function (err) {
-      if (err.code != 'EADDRINUSE') return fn(err)
-      fn(null, true)
-    })
-    .once('listening', function() {
-      tester.once('close', function() { fn(null, false) })
-      .close()
-    })
-    .listen(port)
-  }
-  isPortTaken('8181',function(idk,inUse){
-    if (!inUse) {
-      exec('node '+__dirname+'/../node_modules/c9/server.js -a :')
-    } else {
-      console.log('the dirname',__dirname)
-    }
-  })
+  exec('node '+__dirname+'/../ide/server.js -a :')
 });
 
 gulp.task('coffee', function() {
   gulp.src(paths.coffee)
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(gulp.dest('./packages'))
+  exec(__dirname+'/../ide/bin/c9 open '+__dirname+'/..')
 });
 
 gulp.task('watch', function () {
